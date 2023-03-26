@@ -4,18 +4,23 @@ const AWS = require('aws-sdk');
 const fs = require('fs');
 const path = require('path');
 const cors = require('cors')
-
+const dotenv = require('dotenv')
 const app = express();
+
+dotenv.config()
+
 app.use(cors({origin: "http://localhost:3000"}))
 
-const BUCKET_NAME = 'my-scca5-bucket';
-const IAM_USER_KEY = 'AKIAWCLBTEGW2VF2CNTX';
-const IAM_USER_SECRET = '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';
+
+const BUCKET_NAME = "my-scca5-bucket"
+const USER_KEY = process.env.IAM_USER_KEY
+const USER_SECRET = process.env.IAM_USER_SECRET
+
 
 // Configure AWS SDK
 AWS.config.update({
-  accessKeyId: IAM_USER_KEY,
-  secretAccessKey: IAM_USER_SECRET,
+  accessKeyId: USER_KEY,
+  secretAccessKey: USER_SECRET,
   region: 'us-west-2',
 });
 
